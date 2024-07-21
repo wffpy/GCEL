@@ -6,6 +6,8 @@ set(CMAKE_CUDA_ARCHITECTURES 80)  # 对应于 A800 架构
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CUDA_STANDARD 11)
 
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # find_package(CUDA REQUIRED)
 find_package(CUDA)
 include_directories(${CUDA_INCLUDE_DIRS})
@@ -39,6 +41,7 @@ enable_testing()
 add_executable(
   gcel_tests
   tests/test_main.cpp
+  tests/add_test.cpp
 )
 
 target_link_libraries(
@@ -46,6 +49,7 @@ target_link_libraries(
   gtest_main
   CPU_OP
   GPU_OP
+  UTILS
 )
 
 include(GoogleTest)

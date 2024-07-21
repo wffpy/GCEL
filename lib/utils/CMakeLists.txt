@@ -1,0 +1,1 @@
+add_library(UTILS STATIC random.cpp tensor.cpp)

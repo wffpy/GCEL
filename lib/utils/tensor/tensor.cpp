@@ -1,6 +1,7 @@
 #include "utils/tensor/tensor.h"
 #include "utils/tensor/CpuTensorImpl.h"
 #include "utils/tensor/GpuTensorImpl.h"
+#include <iostream>
 
 namespace utils {
 
@@ -39,7 +40,10 @@ Tensor Tensor::to(DeviceType device) {
     Tensor dst_tensor(impl_->shape(), impl_->data_type(), device);
     if (cur_dev_type == DeviceType::CPU && device == DeviceType::GPU) {
         dst_tensor.impl_->copy_from(this->impl_);
+    } else if (cur_dev_type == DeviceType::GPU && device == DeviceType::CPU) {
+        dst_tensor.impl_->copy_from(this->impl_);
     }
+    return  dst_tensor;
 }
 
 

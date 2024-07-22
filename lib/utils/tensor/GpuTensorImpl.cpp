@@ -32,7 +32,7 @@ GpuTensorImpl::GpuTensorImpl(const std::vector<int64_t>& shape, DataType dtype) 
 void GpuTensorImpl::copy_from(std::shared_ptr<TensorImpl> src) {
     if (src->device_type() == DeviceType::CPU) {
         int64_t bytes = src->capacity();
-        cudaMemcpy(data(), src->data(), bytes, cudaMemcpyHostToDevice);
+        cudaMemcpy(data(), src->data(), bytes, cudaMemcpyDeviceToHost);
     } else if (src->device_type() == DeviceType::GPU) {
         int64_t bytes = src->capacity();
         cudaMemcpy(data(), src->data(), bytes, cudaMemcpyDeviceToDevice);

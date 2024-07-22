@@ -35,7 +35,6 @@ public:
     DataType data_type() { return impl_->data_type(); }
     DeviceType device_type() { return impl_->device_type(); }
     Tensor to(DeviceType dev_type);
-    // void copy_from(const Tensor& other);
 private:
     std::shared_ptr<TensorImpl> impl_;
 };

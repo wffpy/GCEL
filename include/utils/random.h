@@ -1,7 +1,8 @@
 #ifndef UTILS_H
 #define UTILS_H
-#include "tensor.h"
+#include "utils/tensor/tensor.h"
 #include "status.h"
+#include "utils/tensor/basic.h"
 #include <random>
 namespace utils {
 
@@ -19,10 +20,10 @@ GCELResult gen_rand(DT* dst,int64_t size, DT start = 0, DT end = 1) {
     return GCELResult::SUCCESS;
 }
 
-template <typename DT>
-Tensor<DT> gen_rand_tensor(std::vector<int64_t>shape) {
-    Tensor<DT> t(shape);
-    auto ptr = t.data_ptr();
+
+Tensor gen_rand_tensor(std::vector<int64_t>shape, DataType dtype=DataType::FLOAT32, DeviceType device_type=DeviceType::CPU) {
+    Tensor t(shape, dtype, device_type);
+    auto ptr = t.data_ptr<TypeMap<DataType::FLOAT32>::type>();
     int64_t elems = t.elements_num();
     gen_rand(ptr, elems);
     return t;

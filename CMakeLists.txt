@@ -8,6 +8,16 @@ set(CMAKE_CUDA_STANDARD 11)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# 检测并设置AVX编译选项
+include(CheckCXXCompilerFlag)
+check_cxx_compiler_flag("-mavx" COMPILER_SUPPORTS_MAVX)
+if(COMPILER_SUPPORTS_MAVX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mavx")
+else()
+    message(FATAL_ERROR "The compiler does not support AVX extensions")
+endif()
+
+
 # find_package(CUDA REQUIRED)
 find_package(CUDA)
 include_directories(${CUDA_INCLUDE_DIRS})

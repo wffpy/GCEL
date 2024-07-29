@@ -21,6 +21,7 @@ int add(float *lhs, float* rhs, float* ret, int length) {
         __m256 result_part = _mm256_add_ps(vec1_part, vec2_part);
         _mm256_store_ps(&aligned_result[i], result_part);
     }
+    std::copy(&aligned_result[0], &aligned_result[length], ret);
     for (int i = 0; i < length2; ++i) {
         ret[length1 + i] = lhs[length1 + i] + rhs[length1 + i];
     }

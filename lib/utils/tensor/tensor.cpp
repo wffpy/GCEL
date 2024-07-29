@@ -23,6 +23,10 @@ Tensor::Tensor(const std::vector<int64_t>& dims, DataType dtype, DeviceType devi
     impl_ = get_tensor_impl(dims, dtype, device_type);
 }
 
+Tensor::Tensor(const Tensor& other) {
+    impl_ = other.impl_;
+}
+
 const std::vector<int64_t>& Tensor::shape() {
     return impl_->shape();
 }
@@ -35,14 +39,11 @@ int64_t Tensor::elements_num() {
 Tensor Tensor::to(DeviceType device) {
     auto cur_dev_type = impl_->device_type();
     if (cur_dev_type == device) {
+        // std::cout << "Tensor is already on the device" << std::endl;
         return *this;
     }
     Tensor dst_tensor(impl_->shape(), impl_->data_type(), device);
-    if (cur_dev_type == DeviceType::CPU && device == DeviceType::GPU) {
-        dst_tensor.impl_->copy_from(this->impl_);
-    } else if (cur_dev_type == DeviceType::GPU && device == DeviceType::CPU) {
-        dst_tensor.impl_->copy_from(this->impl_);
-    }
+    dst_tensor.impl_->copy_from(this->impl_);
     return  dst_tensor;
 }
 

@@ -28,6 +28,7 @@ class Tensor {
 public:
     // Tensor (std::initializer_list<int64_t> dims, DataType dtype=DataType::FLOAT32, DeviceType device_type=DeviceType::CPU);
     Tensor (const std::vector<int64_t>& dims, DataType dtype=DataType::FLOAT32, DeviceType device_type=DeviceType::CPU);
+    Tensor (const Tensor& other);
     const std::vector<int64_t>& shape();
     int64_t elements_num();
     template <typename DT>

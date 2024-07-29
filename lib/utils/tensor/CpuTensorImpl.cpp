@@ -2,6 +2,7 @@
 #include <cuda_runtime.h>
 #include <numeric>
 #include <cstring>
+#include <iostream>
 
 namespace utils {
 CpuDataStorage::CpuDataStorage(const int64_t bytes, DeviceType device_type) : DataStorage(bytes, device_type) {
@@ -26,6 +27,7 @@ uint8_t* CpuDataStorage::data() {
 CpuTensorImpl::CpuTensorImpl(const std::vector<int64_t>& shape, DataType dtype) : TensorImpl(shape, dtype, DeviceType::CPU) {
     int64_t dtype_bytes = get_dtype_bytes(dtype);
     int64_t bytes = std::accumulate(shape.begin(), shape.end(), dtype_bytes, std::multiplies<int64_t>());
+    // std::cout << "CpuTensorImpl constructor called with size: " << bytes << std::endl;
     std::shared_ptr<CpuDataStorage> data_storage = std::make_shared<CpuDataStorage>(bytes, DeviceType::CPU);
     set_storage(std::move(data_storage));
 }

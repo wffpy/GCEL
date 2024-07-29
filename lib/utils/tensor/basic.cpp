@@ -1,4 +1,5 @@
 #include "utils/tensor/basic.h"
+#include <string>
 
 namespace utils {
 int64_t get_dtype_bytes(DataType dtype) {
@@ -19,4 +20,37 @@ int64_t get_dtype_bytes(DataType dtype) {
     return 4;
 }
 
+std::string get_dtype_str(DataType dtype) {
+    switch(dtype) {
+        case DataType::BOOL:
+            return "bool";
+        case DataType::UINT8:
+            return "uint8";
+        case DataType::INT8:
+            return "int8";
+        case DataType::FLOAT16:
+            return "float16";
+        case DataType::BFLOAT16:
+            return "bfloat16";
+        case DataType::FLOAT32:
+            return "float32";
+        default:
+            // throw std::runtime
+            return "unknown";
+    }
+    return "unknown";
+}
+
+std::string get_device_str(DeviceType device) {
+    switch(device) {
+        case DeviceType::CPU:
+            return "cpu";
+        case DeviceType::GPU:
+            return "gpu";
+        default:
+            // throw std::runtime_error("Unsupported device type");
+            return "unknown";
+    }
+    return "unknown";
+}
 }   // namespace utils

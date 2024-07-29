@@ -1,6 +1,7 @@
 #ifndef UTILS_TENSORE_BASIC_H
 #define UTILS_TENSORE_BASIC_H
 #include <cstdint>
+#include <string>
 
 namespace utils {
 enum class DataType {BOOL, INT8, UINT8, FLOAT16, BFLOAT16, INT32, UINT32, FLOAT32};
@@ -26,6 +27,9 @@ DECLARE_TYPEMAP(DataType::INT32, int32_t);
 DECLARE_TYPEMAP(DataType::UINT32, uint32_t);
 DECLARE_TYPEMAP(DataType::FLOAT32, float);
 
+std::string get_dtype_str(DataType dtype);
+
+std::string get_device_str(DeviceType device);
 
 }   // namespace utils
 #endif

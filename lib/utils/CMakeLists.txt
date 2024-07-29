@@ -1,5 +1,6 @@
 add_subdirectory(tensor)
-add_library(UTILS STATIC random.cpp)
+add_subdirectory(log)
 
-target_link_libraries(UTILS Tensor)
+add_library(UTILS STATIC random.cpp)
+target_link_libraries(UTILS Tensor Log)
 

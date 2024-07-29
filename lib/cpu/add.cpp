@@ -1,6 +1,7 @@
 #include "cpu/cpu.h"
 #include <immintrin.h> // AVX指令集
 #include <cstring>
+#include "utils/log/Log.h"
 
 namespace cpu {
 int add(float *lhs, float* rhs, float* ret, int length) {
@@ -13,8 +14,9 @@ int add(float *lhs, float* rhs, float* ret, int length) {
 
     int64_t length1 = length & (~0x7);
     int64_t length2 = length & 0x7;
-    std::cout << "length1: " << length1 << std::endl;
-    std::cout << "length2: " << length2 << std::endl;
+    DLOG() << "512 bits aligned bytes: " << length1;
+    DLOG() << "Non-512 bits aligned bytes: " << length2;
+
     for (int64_t i = 0; i < length1; i += 8) {
         __m256 vec1_part = _mm256_load_ps(&aligned_vec1[i]);
         __m256 vec2_part = _mm256_load_ps(&aligned_vec2[i]);

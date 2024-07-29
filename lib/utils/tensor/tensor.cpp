@@ -1,6 +1,8 @@
 #include "utils/tensor/tensor.h"
 #include "utils/tensor/CpuTensorImpl.h"
 #include "utils/tensor/GpuTensorImpl.h"
+#include "utils/log/Log.h"
+#include "utils/tensor/basic.h"
 #include <iostream>
 
 namespace utils {
@@ -39,9 +41,10 @@ int64_t Tensor::elements_num() {
 Tensor Tensor::to(DeviceType device) {
     auto cur_dev_type = impl_->device_type();
     if (cur_dev_type == device) {
-        // std::cout << "Tensor is already on the device" << std::endl;
+        LOG() << "Tensor is already on the device";
         return *this;
     }
+    DLOG() << "copy tensor from " << get_device_str(cur_dev_type) << " to " << get_device_str(device);
     Tensor dst_tensor(impl_->shape(), impl_->data_type(), device);
     dst_tensor.impl_->copy_from(this->impl_);
     return  dst_tensor;

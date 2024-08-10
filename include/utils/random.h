@@ -20,12 +20,31 @@ GCELResult gen_rand(DT* dst,int64_t size, DT start = 0, DT end = 1) {
     return GCELResult::SUCCESS;
 }
 
+template<typename DT>
+GCELResult gen_order_seq(DT* dst, int64_t size, DT start, DT step) {
+    for (int64_t i = 0; i < size; i++) {
+        dst[i] = start + step * i;
+    }
+    return GCELResult::SUCCESS;
+}
 
-Tensor gen_rand_tensor(std::vector<int64_t>shape, DataType dtype=DataType::FLOAT32, DeviceType device_type=DeviceType::CPU) {
-    Tensor t(shape, dtype, device_type);
-    auto ptr = t.data_ptr<TypeMap<DataType::FLOAT32>::type>();
-    int64_t elems = t.elements_num();
-    gen_rand(ptr, elems);
+
+Tensor gen_rand_tensor(std::vector<int64_t> shape, DataType dtype=DataType::FLOAT32, DeviceType device_type=DeviceType::CPU);
+
+// Tensor gen_rand_tensor(std::vector<int64_t> shape, DataType dtype=DataType::FLOAT32, DeviceType device_type=DeviceType::CPU) {
+//     Tensor t(shape, dtype, device_type);
+//     auto ptr = t.data_ptr<TypeMap<DataType::FLOAT32>::type>();
+//     int64_t elems = t.elements_num();
+//     gen_rand(ptr, elems);
+//     return t;
+// }
+
+template <class T>
+Tensor gen_order_tensor(std::vector<int64_t> shape, DeviceType device_type=DeviceType::CPU, const T start = 0, const T step = 1) {
+    DataType data_type = CppTypeMap<T>::value;
+    Tensor t(shape, data_type, device_type);
+    auto ptr = t.data_ptr<T>();
+    gen_order_seq<T>(ptr, t.elements_num(), start, step);
     return t;
 }
 

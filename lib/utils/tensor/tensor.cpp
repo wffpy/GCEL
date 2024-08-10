@@ -14,8 +14,7 @@ std::shared_ptr<TensorImpl> get_tensor_impl(std::vector<int64_t> shape, DataType
         case DeviceType::GPU:
             return std::make_shared<GpuTensorImpl>(shape, dtype);
         default:
-            // throw std::runtime_error("Unsupported device type");
-            return nullptr;
+            ELOG() << "Unsupported device type: " << static_cast<int>(device);
     }
     return nullptr;
 }
@@ -29,11 +28,11 @@ Tensor::Tensor(const Tensor& other) {
     impl_ = other.impl_;
 }
 
-const std::vector<int64_t>& Tensor::shape() {
+const std::vector<int64_t>& Tensor::shape() const {
     return impl_->shape();
 }
 
-int64_t Tensor::elements_num() {
+int64_t Tensor::elements_num() const {
     auto shape = impl_->shape();
     return std::accumulate(shape.begin(), shape.end(), 1, std::multiplies<int64_t>());
 }

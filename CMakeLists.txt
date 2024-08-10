@@ -52,6 +52,7 @@ add_executable(
   gcel_tests
   tests/test_main.cpp
   tests/add_test.cpp
+  tests/transpose_test.cpp
 )
 
 target_link_libraries(

@@ -29,12 +29,12 @@ public:
     // Tensor (std::initializer_list<int64_t> dims, DataType dtype=DataType::FLOAT32, DeviceType device_type=DeviceType::CPU);
     Tensor (const std::vector<int64_t>& dims, DataType dtype=DataType::FLOAT32, DeviceType device_type=DeviceType::CPU);
     Tensor (const Tensor& other);
-    const std::vector<int64_t>& shape();
-    int64_t elements_num();
+    const std::vector<int64_t>& shape() const;
+    int64_t elements_num() const;
     template <typename DT>
-    DT* data_ptr();
-    DataType data_type() { return impl_->data_type(); }
-    DeviceType device_type() { return impl_->device_type(); }
+    DT* data_ptr() const;
+    DataType data_type() const { return impl_->data_type(); }
+    DeviceType device_type() const { return impl_->device_type(); }
     Tensor to(DeviceType dev_type);
 private:
     std::shared_ptr<TensorImpl> impl_;
@@ -42,7 +42,7 @@ private:
 
 
 template <typename DT>
-DT* Tensor::data_ptr() {
+DT* Tensor::data_ptr() const {
     return (DT*)(impl_->data());
 }
 

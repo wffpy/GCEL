@@ -1,1 +1,1 @@
-add_library(CPU_OP STATIC add.cpp)
+add_library(CPU_OP STATIC add.cpp transpose.cpp)

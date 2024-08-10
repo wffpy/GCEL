@@ -27,6 +27,23 @@ DECLARE_TYPEMAP(DataType::INT32, int32_t);
 DECLARE_TYPEMAP(DataType::UINT32, uint32_t);
 DECLARE_TYPEMAP(DataType::FLOAT32, float);
 
+
+template <class T>
+struct CppTypeMap;
+
+#define DECLARE_CPPTYPEMAP(cpp_type, data_type) \
+template<>  \
+struct CppTypeMap<cpp_type> { \
+    static const DataType value = data_type; \
+};
+
+DECLARE_CPPTYPEMAP(bool, DataType::BOOL);
+DECLARE_CPPTYPEMAP(int8_t, DataType::INT8);
+DECLARE_CPPTYPEMAP(uint8_t, DataType::UINT8);
+DECLARE_CPPTYPEMAP(int32_t, DataType::INT32);
+DECLARE_CPPTYPEMAP(uint32_t, DataType::UINT32);
+DECLARE_CPPTYPEMAP(float, DataType::FLOAT32);
+
 std::string get_dtype_str(DataType dtype);
 
 std::string get_device_str(DeviceType device);

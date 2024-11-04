@@ -1,4 +1,5 @@
 #include "utils/tensor/CpuTensorImpl.h"
+#include "utils/log/Log.h"
 #include <cuda_runtime.h>
 #include <numeric>
 #include <cstring>
@@ -44,7 +45,9 @@ void CpuTensorImpl::copy_from(std::shared_ptr<TensorImpl> src) {
         }
     } else if (src->device_type() == DeviceType::GPU) {
         int64_t bytes = src->capacity();
-        // TODO: implement copy from GPU to CPU
+        // sync first before copying
+        cudaDeviceSynchronize();
+        DLOG() << "Copying from GPU to CPU, byts: " << bytes;;
         cudaMemcpy(data(), src->data(), bytes, cudaMemcpyDeviceToHost);
     }
 

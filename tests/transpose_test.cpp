@@ -12,8 +12,8 @@
 using namespace utils;
 
 TEST(TransposeTest, _64_x_64) {
-    int64_t row = 64;
-    int64_t col = 64;
+    int64_t row = 32;
+    int64_t col = 16;
 
     std::vector<int64_t> shape{row, col};
     utils::Tensor input = gen_order_tensor<float>(shape);
@@ -23,7 +23,6 @@ TEST(TransposeTest, _64_x_64) {
 
     cpu::transpose(input.data_ptr<float>(), cpu_result.data_ptr<float>(), row,
                    col);
-    // print_tensor(cpu_result, "cpu result");
 
     auto gpu_input = input.to(DeviceType::GPU);
 
@@ -32,7 +31,6 @@ TEST(TransposeTest, _64_x_64) {
                    row, col);
 
     auto gpu_result_cpu = gpu_result.to(DeviceType::CPU);
-    // print_tensor(gpu_result_cpu);
 
     ASSERT_TRUE(compare_tensor(cpu_result, gpu_result_cpu));
 }

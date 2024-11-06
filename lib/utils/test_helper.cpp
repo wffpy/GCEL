@@ -100,20 +100,17 @@ bool compare_tensor(const Tensor& t1, const Tensor& t2, float error_threshold) {
     bool ret = true;
     DataType dtype = t1.data_type();
     // check data
-    for (int64_t i = 0; i < t1.elements_num(); ++i) {
-        if (dtype == DataType::FLOAT32) {
-            using cpp_type = TypeMap<DataType::FLOAT32>::type;
-            ret = check_tensor_data<cpp_type>(t1, t2, error_threshold);
-        } else if (dtype == DataType::BOOL) {
-            using cpp_type = TypeMap<DataType::BOOL>::type;
-            ret = check_tensor_data<cpp_type>(t1, t2, error_threshold);
-        } else if (dtype == DataType::INT32) {
-            using cpp_type = TypeMap<DataType::INT32>::type;
-            ret = check_tensor_data<cpp_type>(t1, t2, error_threshold);
-        } else {
-            ELOG() << "Unsupported data type: "
-                   << get_dtype_str(t1.data_type());
-        }
+    if (dtype == DataType::FLOAT32) {
+        using cpp_type = TypeMap<DataType::FLOAT32>::type;
+        ret = check_tensor_data<cpp_type>(t1, t2, error_threshold);
+    } else if (dtype == DataType::BOOL) {
+        using cpp_type = TypeMap<DataType::BOOL>::type;
+        ret = check_tensor_data<cpp_type>(t1, t2, error_threshold);
+    } else if (dtype == DataType::INT32) {
+        using cpp_type = TypeMap<DataType::INT32>::type;
+        ret = check_tensor_data<cpp_type>(t1, t2, error_threshold);
+    } else {
+        ELOG() << "Unsupported data type: " << get_dtype_str(t1.data_type());
     }
     return ret;
 }

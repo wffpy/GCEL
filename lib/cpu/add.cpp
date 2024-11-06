@@ -1,16 +1,20 @@
-#include "cpu/cpu.h"
-#include <immintrin.h> // AVX指令集
+#include <immintrin.h>  // AVX指令集
+
 #include <cstring>
+
+#include "cpu/cpu.h"
 #include "utils/log/Log.h"
 
 namespace cpu {
-int add(float *lhs, float* rhs, float* ret, int length) {
-    float* aligned_vec1 = static_cast<float*>(_mm_malloc(length * sizeof(float), 32));
-    float* aligned_vec2 = static_cast<float*>(_mm_malloc(length * sizeof(float), 32));
-    float* aligned_result = static_cast<float*>(_mm_malloc(length* sizeof(float), 32));
+int add(float* lhs, float* rhs, float* ret, int length) {
+    float* aligned_vec1 =
+        static_cast<float*>(_mm_malloc(length * sizeof(float), 32));
+    float* aligned_vec2 =
+        static_cast<float*>(_mm_malloc(length * sizeof(float), 32));
+    float* aligned_result =
+        static_cast<float*>(_mm_malloc(length * sizeof(float), 32));
     std::copy(lhs, lhs + length, aligned_vec1);
     std::copy(rhs, rhs + length, aligned_vec2);
-
 
     int64_t length1 = length & (~0x7);
     int64_t length2 = length & 0x7;

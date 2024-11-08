@@ -1,7 +1,13 @@
-#include <cuda_runtime.h>
+# Transpose
 
-#include "gpu/gpu.h"
-#include "utils/cal_helper/cal_helper.h"
+## CPU
+TODO
+
+
+## GPU
+
+Native Transpose Kernel:
+```c++
 namespace gpu_kernel {
 // CUDA kernel function to transpose a matrix
 template <typename T>
@@ -40,13 +46,8 @@ utils::GCELResult transpose(const T* input, T* ret, int64_t row, int64_t col) {
 
     return utils::GCELResult::SUCCESS;
 }
-
-#define INSTANTIATE_TRANSPOSE(T) \
-    template utils::GCELResult transpose<T>(const T*, T*, int64_t, int64_t);
-
-INSTANTIATE_TRANSPOSE(char);
-INSTANTIATE_TRANSPOSE(int32_t);
-INSTANTIATE_TRANSPOSE(int64_t);
-INSTANTIATE_TRANSPOSE(float);
-INSTANTIATE_TRANSPOSE(double);
-}  // namespace gpu
+}
+```
+According to the example code, BlockIdm.x = 32. In each block, there are 32 * block_size threads.  
+In each block, each 32 threads in a row will be managed in a warp. When load data from global memory, they will access consistent memory. This means that the consistent memory access will be Coalesced. The memory-accessing is efficient.  
+It's unfortunate that the write-back operation is not coalesced. Two consistent threads will access two memory addresses with a step of col size.

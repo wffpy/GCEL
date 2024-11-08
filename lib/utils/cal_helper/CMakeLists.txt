@@ -1,0 +1,1 @@
+add_library(CalHelper STATIC cal_helper.cpp)

@@ -2,7 +2,7 @@
 
 #include <cstring>
 
-#include "cpu/cpu.h"
+#include "cpu/kernels/cpu.h"
 #include "utils/log/Log.h"
 
 namespace cpu {

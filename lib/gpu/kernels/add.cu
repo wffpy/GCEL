@@ -1,5 +1,5 @@
 #include <cuda_runtime.h>
-#include "gpu/gpu.h"
+#include "gpu/kernels/gpu.h"
 namespace gpu_kernel{
 // CUDA kernel function to add elements of two arrays
 __global__ void add(float *a, float *b, float *c, int n) {
@@ -12,7 +12,7 @@ __global__ void add(float *a, float *b, float *c, int n) {
 
 
 namespace gpu {
-int add(float *lhs, float *rhs, float *ret, int length) {
+int add(float *lhs, float *rhs, float *ret, int length, int64_t priority) {
     int blockSize = 256;
     int numBlocks = (length + blockSize - 1) / blockSize;
     gpu_kernel::add<<<numBlocks, blockSize>>>(lhs, rhs, ret, length);

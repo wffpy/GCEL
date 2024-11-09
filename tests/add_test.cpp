@@ -2,8 +2,8 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include <vector>
-#include "cpu/cpu.h"
-#include "gpu/gpu.h"
+#include "cpu/kernels/cpu.h"
+#include "gpu/kernels/gpu.h"
 #include "utils/tensor/tensor.h"
 #include "utils/random.h"
 using namespace utils;

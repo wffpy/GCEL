@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 
-#include "cpu/cpu.h"
-#include "gpu/gpu.h"
+#include "cpu/kernels/cpu.h"
+#include "gpu/kernels/gpu.h"
 #include "utils/random.h"
 #include "utils/tensor/tensor.h"
 #include "utils/test_helper.h"

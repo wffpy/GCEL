@@ -1,5 +1,5 @@
 #include <cuda_runtime.h>
-#include "gpu/gpu.h"
+#include "gpu/kernels/gpu.h"
 
 namespace gpu_kernel {
 // CUDA kernel function to do dot-product of two vectors

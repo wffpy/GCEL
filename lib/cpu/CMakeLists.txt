@@ -1,1 +1,2 @@
-add_library(CPU_OP STATIC add.cpp transpose.cpp)
+add_subdirectory(kernels)
+add_subdirectory(profiler)

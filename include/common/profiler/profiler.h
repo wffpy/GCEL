@@ -1,7 +1,8 @@
 #ifndef PORFILER_H
 #define PORFILER_H
+#include <memory>
 
-namespace profielr {
+namespace profiler {
 
 enum class ProfilerType {
     CPU = 0, GPU = 1
@@ -18,7 +19,7 @@ public:
     void stop();
 private:
     ProfilerType type_;
-    ProfilerImpl *impl_;
+    std::shared_ptr<ProfilerImpl> impl_;
 };
 
 class ProfilerImpl {
@@ -28,6 +29,6 @@ public:
     virtual void stop() = 0;
 };
 
-} // namespace profielr
+} // namespace profiler
 
 #endif

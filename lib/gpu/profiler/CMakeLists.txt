@@ -1,0 +1,1 @@
+add_library(GPU_PROFILER STATIC GpuProfiler.cpp)

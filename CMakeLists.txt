@@ -48,20 +48,22 @@ endif()
 
 enable_testing()
 
-add_executable(
-  gcel_tests
-  tests/test_main.cpp
-  tests/add_test.cpp
-  tests/transpose_test.cpp
-)
+# add_executable(
+#   gcel_tests
+#   tests/test_main.cpp
+#   tests/add_test.cpp
+#   tests/transpose_test.cpp
+# )
 
-target_link_libraries(
-  gcel_tests
-  gtest_main
-  CPU_OP
-  GPU_OP
-  UTILS
-)
+# target_link_libraries(
+#   gcel_tests
+#   gtest_main
+#   CPU_OP
+#   GPU_OP
+#   UTILS
+# )
 
-include(GoogleTest)
-gtest_discover_tests(gcel_tests)
+# include(GoogleTest)
+# gtest_discover_tests(gcel_tests)
+
+add_subdirectory(tests)

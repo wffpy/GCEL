@@ -22,4 +22,8 @@ void GpuProfilerImpl::stop() {
     ELOG() << "GpuProfilerImpl is not implemented";
 }
 
+int64_t GpuProfilerImpl::get_duration() {
+    ELOG() << "GpuProfilerImpl is not implemented";
+    return 0;
+}
 }   // namespace gpu_profiler

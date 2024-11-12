@@ -11,6 +11,7 @@ public:
     virtual void  config() override;
     virtual void start() override;
     virtual void stop() override;
+    virtual int64_t get_duration() override;
 
 };
 

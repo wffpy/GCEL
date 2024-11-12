@@ -24,5 +24,6 @@ void Profiler::start() { impl_->start(); }
 
 void Profiler::stop() { impl_->stop(); }
 
+int64_t Profiler::get_duration() { return impl_->get_duration(); }
 
 }   // namespace profiler

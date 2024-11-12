@@ -12,7 +12,7 @@
 using namespace utils;
 
 #define DEFINE_TRANSPOSE_TEST(r, c)                                          \
-    TEST(TransposeTest, r##_x_##c) {                                         \
+    TEST(TransposePerfTest, r##_x_##c) {                                         \
         int64_t row = r;                                                     \
         int64_t col = c;                                                     \
         std::vector<int64_t> shape{row, col};                                \
@@ -20,7 +20,7 @@ using namespace utils;
         auto gpu_input = input.to(DeviceType::GPU);                          \
         utils::Tensor gpu_result(shape, DataType::FLOAT32, DeviceType::GPU); \
         PROFILE_SCOPE_BEGIN(100);                                            \
-        gpu::transpose(gpu_input.data_ptr<float>(),                           \ 
+        gpu::transpose(gpu_input.data_ptr<float>(),                           \
                         gpu_result.data_ptr<float>(),                        \
                        row, col);                                            \
         PROFILE_SCOPE_END();                                                 \

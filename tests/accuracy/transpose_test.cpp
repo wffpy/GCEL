@@ -12,7 +12,7 @@
 using namespace utils;
 
 #define DEFINE_TRANSPOSE_TEST(r, c)                                           \
-    TEST(TransposeTest, r##_x_##c) {                                          \
+    TEST(TransposeAccTest, r##_x_##c) {                                          \
         int64_t row = r;                                                      \
         int64_t col = c;                                                      \
                                                                               \

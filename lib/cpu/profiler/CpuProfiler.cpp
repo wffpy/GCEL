@@ -1,6 +1,8 @@
 #include "cpu/profiler/CpuProfiler.h"
 #include "utils/log/Log.h"
 
+#include <chrono>
+
 namespace cpu_profiler {
 CpuProfilerImpl::CpuProfilerImpl() {
     ELOG() << "CpuProfilerImpl is not implemented yet";
@@ -11,15 +13,23 @@ CpuProfilerImpl::~CpuProfilerImpl() {
 }
 
 void CpuProfilerImpl::config() {
-    ELOG() << "CpuProfilerImpl is not implemented yet";
+    DLOG() << "call " << __FUNCTION__;
 }
 
 void CpuProfilerImpl::start() {
-    ELOG() << "CpuProfilerImpl is not implemented yet";
+    DLOG() << "call " << __FUNCTION__;
+    start_time_ = std::chrono::high_resolution_clock::now();
 }
 
 void CpuProfilerImpl::stop() {
-    ELOG() << "CpuProfilerImpl is not implemented yet";
+    DLOG() << "call " << __FUNCTION__;
+    stop_time_ = std::chrono::high_resolution_clock::now();
+}
+
+int64_t CpuProfilerImpl::get_duration() {
+    DLOG() << "call " << __FUNCTION__;
+    return std::chrono::duration_cast<std::chrono::nanoseconds>(stop_time_ - start_time_)
+        .count();
 }
 
 }   // namespace cpu_profiler

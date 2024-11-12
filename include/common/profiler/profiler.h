@@ -17,6 +17,7 @@ public:
     void config();
     void start();
     void stop();
+    int64_t get_duration();
 private:
     ProfilerType type_;
     std::shared_ptr<ProfilerImpl> impl_;
@@ -27,6 +28,7 @@ public:
     virtual void config() = 0;
     virtual void start() = 0;
     virtual void stop() = 0;
+    virtual int64_t get_duration() = 0;
 };
 
 } // namespace profiler

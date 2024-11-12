@@ -8,7 +8,7 @@
 #include "utils/random.h"
 using namespace utils;
 
-TEST(AddTest, _2560_x_8192) {
+TEST(AddAccTest, _2560_x_8192) {
     std::vector<int64_t> shape{2, 16};
     utils::Tensor lhs = gen_rand_tensor(shape);
     utils::Tensor rhs = gen_rand_tensor(shape);

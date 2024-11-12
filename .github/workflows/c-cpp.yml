@@ -25,9 +25,9 @@ jobs:
       run: |
         echo "Setting timezone to $TZ"
         echo "tzdata tzdata/Areas select America" | sudo debconf-set-selections
-        echo "tzdata tzdata/Zones/America select New_York" | sudo debconf-set-selections
-        sudo ln -sf /usr/share/zoneinfo/$TZ /etc/localtime
-        sudo dpkg-reconfigure -f noninteractive tzdata
+        echo "tzdata tzdata/Zones/America select New_York" | debconf-set-selections
+        ln -sf /usr/share/zoneinfo/$TZ /etc/localtime
+        dpkg-reconfigure -f noninteractive tzdata
 
     - name: Install dependencies
       run: |

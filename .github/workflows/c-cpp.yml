@@ -10,10 +10,18 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    container:
+      image: nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        apt-get update
+        apt-get install -y build-essential cmake
+
     - name: Build and Test
       run: |
         mkdir build

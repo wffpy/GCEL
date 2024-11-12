@@ -13,9 +13,26 @@ jobs:
     container:
       image: nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04
 
+    env:
+      TZ: "America/New_York"  # Set your desired timezone here
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+  
+
+    - name: Set timezone non-interactively
+      run: |
+        echo "Setting timezone to $TZ"
+        echo "tzdata tzdata/Areas select America" | sudo debconf-set-selections
+        echo "tzdata tzdata/Zones/America select New_York" | sudo debconf-set-selections
+        sudo ln -sf /usr/share/zoneinfo/$TZ /etc/localtime
+        sudo dpkg-reconfigure -f noninteractive tzdata
+
+    - name: Install dependencies
+      run: |
+        apt-get update
+        apt-get install -y cmake
 
     - name: Build and Test
       run: |

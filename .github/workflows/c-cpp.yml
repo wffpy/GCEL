@@ -1,0 +1,23 @@
+name: GCEL CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Build and Test
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        cmake --build .
+        ctest -R AccTest # 运行测试

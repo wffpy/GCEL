@@ -1,4 +1,4 @@
-add_library(GPU_OP STATIC add.cu transpose.cu)
+add_library(GPU_OP STATIC add.cu transpose.cu gemm.cu)
 set_target_properties(GPU_OP PROPERTIES
     CUDA_SEPARABLE_COMPILATION ON
 )

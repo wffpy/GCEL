@@ -3,6 +3,7 @@ add_executable(
   test_main.cpp
   add_test.cpp
   transpose_test.cpp
+  gemm_test.cpp
 )
 
 target_link_libraries(

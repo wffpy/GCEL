@@ -1,6 +1,7 @@
 #include "common/tensor/tensor.h"
 #include "common/tensor/CpuTensorImpl.h"
 #include "common/tensor/GpuTensorImpl.h"
+#include "common/tensor/MetaTensorImpl.h"
 #include "utils/log/Log.h"
 #include "common/tensor/basic.h"
 #include <iostream>
@@ -14,7 +15,7 @@ std::shared_ptr<TensorImpl> get_tensor_impl(std::vector<int64_t> shape, DataType
         case DeviceType::GPU:
             return std::make_shared<GpuTensorImpl>(shape, dtype);
         case DeviceType::META:
-            return nullptr;
+            return std::make_shared<MetaTensorImpl>(shape, dtype);
         default:
             ELOG() << "Unsupported device type: " << static_cast<int>(device);
     }

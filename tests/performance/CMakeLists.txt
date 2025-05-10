@@ -7,10 +7,11 @@ add_executable(
 target_link_libraries(
   gcel_perf_tests
   gtest_main
-  CPU_OP
+  CPU_KERNELS
   GPU_OP
   UTILS
   PROFILER
+  Tensor
 )
 
 # include(GoogleTest)

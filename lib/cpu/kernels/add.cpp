@@ -2,17 +2,18 @@
 
 #include <cstring>
 
-#include "cpu/kernels/cpu.h"
+#include "cpu/kernels/cpu_kernels.h"
 #include "utils/log/Log.h"
 
-namespace cpu {
-int add(float* lhs, float* rhs, float* ret, int length) {
-    float* aligned_vec1 =
-        static_cast<float*>(_mm_malloc(length * sizeof(float), 32));
-    float* aligned_vec2 =
-        static_cast<float*>(_mm_malloc(length * sizeof(float), 32));
-    float* aligned_result =
-        static_cast<float*>(_mm_malloc(length * sizeof(float), 32));
+namespace cpu_kernels {
+template <typename T>
+int add(T* lhs, T* rhs, T* ret, int length) {
+    T* aligned_vec1 =
+        static_cast<T*>(_mm_malloc(length * sizeof(T), 32));
+    T* aligned_vec2 =
+        static_cast<T*>(_mm_malloc(length * sizeof(T), 32));
+    T* aligned_result =
+        static_cast<T*>(_mm_malloc(length * sizeof(T), 32));
     std::copy(lhs, lhs + length, aligned_vec1);
     std::copy(rhs, rhs + length, aligned_vec2);
 
@@ -34,4 +35,9 @@ int add(float* lhs, float* rhs, float* ret, int length) {
     return 0;
 }
 
-}  // namespace cpu
+#define INSTANTIATE_ADD(T)                                                         \
+    template int add<T>(T* lhs, T* rhs, T* ret, int length);
+
+INSTANTIATE_ADD(float);
+INSTANTIATE_ADD(int32_t);
+}  // namespace cpu_kernels

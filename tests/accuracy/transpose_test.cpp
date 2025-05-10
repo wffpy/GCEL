@@ -4,12 +4,13 @@
 #include <iostream>
 #include <vector>
 
-#include "cpu/kernels/cpu.h"
-#include "gpu/kernels/gpu.h"
+#include "cpu/kernels/cpu_kernels.h"
+#include "gpu/kernels/gpu_kernels.h"
 #include "utils/random.h"
-#include "utils/tensor/tensor.h"
+#include "common/tensor/tensor.h"
 #include "utils/test_helper.h"
 using namespace utils;
+using namespace common;
 
 #define DEFINE_TRANSPOSE_TEST(r, c)                                           \
     TEST(TransposeAccTest, r##_x_##c) {                                          \
@@ -17,18 +18,18 @@ using namespace utils;
         int64_t col = c;                                                      \
                                                                               \
         std::vector<int64_t> shape{row, col};                                 \
-        utils::Tensor input = gen_order_tensor<float>(shape);                 \
+        Tensor input = gen_order_tensor<float>(shape);                 \
                                                                               \
         std::vector<int64_t> result_shape{row, col};                          \
-        utils::Tensor cpu_result(result_shape, input.data_type());            \
+        Tensor cpu_result(result_shape, input.data_type());            \
                                                                               \
-        cpu::transpose(input.data_ptr<float>(), cpu_result.data_ptr<float>(), \
+        cpu_kernels::transpose(input.data_ptr<float>(), cpu_result.data_ptr<float>(), \
                        row, col);                                             \
                                                                               \
         auto gpu_input = input.to(DeviceType::GPU);                           \
                                                                               \
-        utils::Tensor gpu_result(shape, DataType::FLOAT32, DeviceType::GPU);  \
-        gpu::transpose(gpu_input.data_ptr<float>(),                           \
+        Tensor gpu_result(shape, DataType::FLOAT32, DeviceType::GPU);  \
+        gpu_kernels::transpose(gpu_input.data_ptr<float>(),                           \
                        gpu_result.data_ptr<float>(), row, col);               \
         auto gpu_result_cpu = gpu_result.to(DeviceType::CPU);                 \
         ASSERT_TRUE(compare_tensor(cpu_result, gpu_result_cpu));              \

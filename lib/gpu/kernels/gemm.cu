@@ -1,5 +1,5 @@
 #include <cuda_runtime.h>
-#include "gpu/kernels/gpu.h"
+#include "gpu/kernels/gpu_kernels.h"
 #include <mma.h>
 #include <cuda_bf16.h>
 #include <cuda_fp16.h>
@@ -56,12 +56,7 @@ __global__ void gemm_tensorcore(const T *A, const T *B, T *C, int m, int n, int 
 
 }   // namespace gpu_kernel
 
-namespace gpu {
-// template <typename T, typename std::enable_if<std::is_same<T, float>::value>::type >
-// GCELResult gemm(const T* lhs, const T* rhs, T* ret, int64_t m, int64_t n, int64_t k) {
-//     return GCELResult::SUCCESS;
-// }
-
+namespace gpu_kernels {
 template <typename T>
 GCELResult gemm(const T* lhs, const T* rhs, T* ret, int64_t m, int64_t n, int64_t k) {
     int row_tile_dim = 32; 
@@ -90,4 +85,4 @@ GCELResult gemm(const T* lhs, const T* rhs, T* ret, int64_t m, int64_t n, int64_
 
 INSTANTIATE_GEMM(half);
 INSTANTIATE_GEMM(float);
-}   // namespace gpu
+}   // namespace gpu_kernels

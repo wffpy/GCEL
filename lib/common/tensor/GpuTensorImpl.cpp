@@ -1,12 +1,13 @@
-#include "utils/tensor/GpuTensorImpl.h"
+#include "common/tensor/GpuTensorImpl.h"
 #include "cuda_runtime.h"
 #include <numeric>
 #include <iostream> 
 #include "utils/log/Log.h"
 
-namespace utils {
+namespace common {
 GpuDataStorage::GpuDataStorage(const int64_t bytes, DeviceType device_type) : DataStorage(bytes, device_type) {
-    if (bytes > 0) { cudaMalloc((void **)&data_, bytes);
+    if (bytes > 0) {
+        cudaMalloc((void **)&data_, bytes);
     } else {
         data_ = nullptr;
     }
@@ -43,4 +44,4 @@ void GpuTensorImpl::copy_from(std::shared_ptr<TensorImpl> src) {
     }
 }
 
-}   // namespace utils
+}   // namespace common

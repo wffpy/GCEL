@@ -1,8 +1,8 @@
-#ifndef UTILS_TENSOR_CPUTENSORIMPL_H
-#define UTILS_TENSOR_CPUTENSORIMPL_H
-#include "utils/tensor/TensorImpl.h"
+#ifndef TENSOR_CPUTENSORIMPL_H
+#define TENSOR_CPUTENSORIMPL_H
+#include "common/tensor/TensorImpl.h"
 
-namespace utils {
+namespace common {
 class CpuDataStorage : public DataStorage {
 public:
     CpuDataStorage(const int64_t bytes, DeviceType device_type);
@@ -19,5 +19,5 @@ public:
     virtual void copy_from(std::shared_ptr<TensorImpl> src) override;
 };
 
-}   // namespace utils
+}   // namespace common
 #endif

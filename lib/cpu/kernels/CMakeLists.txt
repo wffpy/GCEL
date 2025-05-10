@@ -1,2 +1,2 @@
-# add_library(CPU_OP STATIC add.cpp transpose.cpp)
-add_library(CPU_OP STATIC add.cpp transpose.cpp gemm.cpp)
+file(GLOB CPU_KERNEL_SRC_FILES *.cpp)
+add_library(CPU_KERNELS STATIC ${CPU_KERNEL_SRC_FILES})

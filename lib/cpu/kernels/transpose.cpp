@@ -1,9 +1,9 @@
 #include <algorithm>
 
-#include "cpu/kernels/cpu.h"
+#include "cpu/kernels/cpu_kernels.h"
 #include "utils/log/Log.h"
 
-namespace cpu {
+namespace cpu_kernels {
 template <typename T>
 utils::GCELResult transpose(const T* input, T* ret, int64_t row, int64_t col,
                             int64_t row_block_size, int64_t col_block_size) {
@@ -30,4 +30,4 @@ INSTANTIATE_TRANSPOSE(int32_t);
 INSTANTIATE_TRANSPOSE(int64_t);
 INSTANTIATE_TRANSPOSE(float);
 INSTANTIATE_TRANSPOSE(double);
-}  // namespace cpu
+}  // namespace cpu_kernels

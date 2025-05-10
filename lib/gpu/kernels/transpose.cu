@@ -1,6 +1,6 @@
 #include <cuda_runtime.h>
 
-#include "gpu/kernels/gpu.h"
+#include "gpu/kernels/gpu_kernels.h"
 #include "utils/cal_helper/cal_helper.h"
 namespace gpu_kernel {
 // CUDA kernel function to transpose a matrix
@@ -28,7 +28,7 @@ __global__ void transpose_impl_1_(const T* input, T* ret, int64_t row,
 
 }  // namespace gpu_kernel
 
-namespace gpu {
+namespace gpu_kernels {
 
 #define CALL_TRANSPOSE_IMPL(n)                                \
     gpu_kernel::transpose_impl_##n##_<<<dimGrid, dimBlock>>>( \
@@ -64,4 +64,4 @@ INSTANTIATE_TRANSPOSE(int32_t);
 INSTANTIATE_TRANSPOSE(int64_t);
 INSTANTIATE_TRANSPOSE(float);
 INSTANTIATE_TRANSPOSE(double);
-}  // namespace gpu
+}  // namespace gpu_kernels

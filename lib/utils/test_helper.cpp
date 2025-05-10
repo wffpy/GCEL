@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "utils/log/Log.h"
-#include "utils/tensor/basic.h"
+#include "common/tensor/basic.h"
 
 namespace utils {
 

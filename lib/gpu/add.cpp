@@ -1,6 +1,6 @@
 #include <cuda_runtime.h>
 
-#include "gpu/gpu.h"
+#include "gpu/gpu_kernels.h"
 // namespace gpu_kernel {
 __global__ void add_gpu(float *a, float *b, float *c, int n);
 // }   // namespace gpu_kernel

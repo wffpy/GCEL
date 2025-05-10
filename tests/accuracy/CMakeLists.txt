@@ -9,9 +9,10 @@ add_executable(
 target_link_libraries(
   gcel_tests
   gtest_main
-  CPU_OP
+  CPU_KERNELS
   GPU_OP
   UTILS
+  Tensor
 )
 
 # include(GoogleTest)

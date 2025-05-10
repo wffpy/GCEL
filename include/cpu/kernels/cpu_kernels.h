@@ -1,11 +1,12 @@
-#ifndef CPU_OPS_H
-#define CPU_OPS_H
+#ifndef CPU_KERNELS_H
+#define CPU_KERNELS_H
 #include <iostream>
 #include "utils/status.h"
 #include <vector>
 
-namespace cpu {
-int add(float *lhs, float *rhs, float* ret, int length);
+namespace cpu_kernels {
+template <typename T>
+int add(T *lhs, T *rhs, T* ret, int length);
 
 template <typename T>
 utils::GCELResult gemm(const T* lhs, const T* rhs, T* ret, int64_t m, int64_t n, int64_t k, bool lhs_trans=false, bool rhs_trans=false);

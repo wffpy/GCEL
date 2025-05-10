@@ -1,6 +1,6 @@
-#include "utils/tensor/TensorImpl.h"
+#include "common/tensor/TensorImpl.h"
 
-namespace utils {
+namespace common {
 DataStorage::DataStorage(const int64_t bytes, DeviceType device_type) : bytes_(bytes), device_type_(device_type) {
 }
 DataStorage::~DataStorage() {
@@ -40,4 +40,4 @@ int64_t TensorImpl::capacity() const {
 void TensorImpl::set_storage(std::shared_ptr<DataStorage> storage) {
     storage_ = storage;
 }
-}   // namespace utils
+}   // namespace common

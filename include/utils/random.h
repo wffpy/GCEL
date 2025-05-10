@@ -1,9 +1,10 @@
 #ifndef UTILS_H
 #define UTILS_H
-#include "utils/tensor/tensor.h"
+#include "common/tensor/tensor.h"
 #include "status.h"
-#include "utils/tensor/basic.h"
+#include "common/tensor/basic.h"
 #include <random>
+using namespace common;
 namespace utils {
 
 template <typename DT>

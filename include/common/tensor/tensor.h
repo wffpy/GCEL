@@ -6,23 +6,12 @@
 #include <memory>
 #include <numeric>
 
-#include "utils/tensor/basic.h"
-#include "utils/tensor/TensorImpl.h"
+#include "common/tensor/basic.h"
+#include "common/tensor/TensorImpl.h"
 
-namespace utils {
+namespace common {
 
 int64_t get_dtype_bytes(DataType dtype);
-
-// class DataPtr {
-// public:
-//     DataPtr() = delete;
-//     DataPtr(int64_t bytes);
-//     ~DataPtr();
-//     uint8_t* data() { return ptr; }
-// private:
-//     uint8_t* ptr;
-//     int64_t bytes_;
-// };
 
 class Tensor {
 public:
@@ -46,5 +35,5 @@ DT* Tensor::data_ptr() const {
     return (DT*)(impl_->data());
 }
 
-}   // namespace utils
+}   // namespace common
 #endif

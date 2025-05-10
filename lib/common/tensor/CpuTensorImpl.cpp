@@ -1,11 +1,11 @@
-#include "utils/tensor/CpuTensorImpl.h"
+#include "common/tensor/CpuTensorImpl.h"
 #include "utils/log/Log.h"
 #include <cuda_runtime.h>
 #include <numeric>
 #include <cstring>
 #include <iostream>
 
-namespace utils {
+namespace common {
 CpuDataStorage::CpuDataStorage(const int64_t bytes, DeviceType device_type) : DataStorage(bytes, device_type) {
     if (bytes > 0) {
         data_ = new uint8_t[bytes];
@@ -53,4 +53,4 @@ void CpuTensorImpl::copy_from(std::shared_ptr<TensorImpl> src) {
 
 }
 
-}   // namespace utils
+}   // namespace common

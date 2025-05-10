@@ -3,8 +3,8 @@
 #include <memory>
 #include <vector>
 
-#include "utils/tensor/basic.h"
-namespace utils {
+#include "common/tensor/basic.h"
+namespace common {
 class DataStorage {
   public:
     DataStorage(const int64_t bytes, DeviceType device_type);
@@ -36,5 +36,5 @@ class TensorImpl {
     std::shared_ptr<DataStorage> storage_;
 };
 
-}   // namespace utils
+}   // namespace common
 #endif

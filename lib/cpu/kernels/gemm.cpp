@@ -2,10 +2,10 @@
 
 #include <cstring>
 
-#include "cpu/kernels/cpu.h"
+#include "cpu/kernels/cpu_kernels.h"
 #include "utils/log/Log.h"
 
-namespace cpu {
+namespace cpu_kernels {
 
 // // [v0, v1, v2, v3, v4, v5, v6, v7]
 // float reduce_with_add(__m256 v) {
@@ -118,4 +118,4 @@ INSTANTIATE_GEMM(uint8_t);
 INSTANTIATE_GEMM(int32_t);
 INSTANTIATE_GEMM(int64_t);
 INSTANTIATE_GEMM(float);
-}  // namespace cpu
+}  // namespace cpu_kernels

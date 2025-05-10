@@ -2,8 +2,8 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include <vector>
-#include "cpu/kernels/cpu.h"
-#include "gpu/kernels/gpu.h"
+#include "cpu/kernels/cpu_kernels.h"
+#include "gpu/kernels/gpu_kernels.h"
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);

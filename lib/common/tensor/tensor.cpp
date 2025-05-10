@@ -1,11 +1,11 @@
-#include "utils/tensor/tensor.h"
-#include "utils/tensor/CpuTensorImpl.h"
-#include "utils/tensor/GpuTensorImpl.h"
+#include "common/tensor/tensor.h"
+#include "common/tensor/CpuTensorImpl.h"
+#include "common/tensor/GpuTensorImpl.h"
 #include "utils/log/Log.h"
-#include "utils/tensor/basic.h"
+#include "common/tensor/basic.h"
 #include <iostream>
 
-namespace utils {
+namespace common {
 
 std::shared_ptr<TensorImpl> get_tensor_impl(std::vector<int64_t> shape, DataType dtype, DeviceType device) {
     switch(device) {
@@ -13,6 +13,8 @@ std::shared_ptr<TensorImpl> get_tensor_impl(std::vector<int64_t> shape, DataType
             return std::make_shared<CpuTensorImpl>(shape, dtype);
         case DeviceType::GPU:
             return std::make_shared<GpuTensorImpl>(shape, dtype);
+        case DeviceType::META:
+            return nullptr;
         default:
             ELOG() << "Unsupported device type: " << static_cast<int>(device);
     }
@@ -50,4 +52,4 @@ Tensor Tensor::to(DeviceType device) {
 }
 
 
-}   // namespace utils 
+}   // namespace common 

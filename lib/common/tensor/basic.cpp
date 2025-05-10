@@ -1,7 +1,8 @@
-#include "utils/tensor/basic.h"
+#include "common/tensor/basic.h"
 #include <string>
+#include "utils/log/Log.h"
 
-namespace utils {
+namespace common {
 int64_t get_dtype_bytes(DataType dtype) {
     switch(dtype) {
         case DataType::BOOL:
@@ -14,7 +15,7 @@ int64_t get_dtype_bytes(DataType dtype) {
         case DataType::FLOAT32:
             return 4;
         default:
-            // throw std::runtime_error("Unsupported data type");
+            ELOG() << "Unsupported data type";
             return 4;
     }
     return 4;
@@ -53,4 +54,4 @@ std::string get_device_str(DeviceType device) {
     }
     return "unknown";
 }
-}   // namespace utils
+}   // namespace common

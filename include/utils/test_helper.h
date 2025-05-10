@@ -1,7 +1,8 @@
 #ifndef UTILS_TEST_HELPER_H
 #define UTILS_TEST_HELPER_H
 
-#include "utils/tensor/tensor.h"
+#include "common/tensor/tensor.h"
+using namespace common;
 
 namespace utils {
 void print_tensor(const Tensor& t, std::string t_name = "");
